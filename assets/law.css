@@ -1,0 +1,19 @@
+article
+{
+  width: 80ch;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+h1
+{
+  text-align: center;
+}
+
+pre
+{
+  border: 1px solid;
+  padding: 0.5rem;
+  overflow-x: auto;
+  width: 95%;
+}

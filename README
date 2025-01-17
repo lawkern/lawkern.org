@@ -1,0 +1,5 @@
+This repository is used to generate the contents of https://lawkern.com.
+
+Individual pages are formatted based on Org Mode. They are published to HTML
+using Emacs, via the included export.el Lisp file. The included Makefile acts as
+a wrapper for the shell command that executes the export script via Emacs.

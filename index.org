@@ -1,0 +1,9 @@
+#+TITLE:lawkern.com
+
+#+KEYWORDS: Programming, Computers
+#+DESCRIPTION: The personal website of Lawrence D. Kern.
+
+#+OPTIONS: title:nil html-postamble:nil
+#+HTML_HEAD_EXTRA:
+
+[[./hello-n64.org][Hello N64]]
