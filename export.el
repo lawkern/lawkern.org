@@ -55,11 +55,10 @@
 
 (setq org-html-postamble t)
 (setq org-html-postamble-format
-      '(("en" "<footer style=\"display: flex; justify-content: space-between; gap: 0.5rem;\">
-<a href=\"/\">Home</a>
+      '(("en" "<a href=\"/\">Home</a>
 <address>%a</address>
 <time datetime=\"%d\">%d</time>
-</footer>")))
+")))
 
 (setq org-html-footnotes-section "<hr>
 <section id=\"%s\">

@@ -17,3 +17,10 @@ pre
   overflow-x: auto;
   width: 95%;
 }
+
+footer
+{
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
