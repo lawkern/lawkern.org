@@ -73,5 +73,49 @@ contextual information."
   (let* ((code (org-html-format-code src-block info)))
 	(format "<pre><code>%s</code></pre>" code)))
 
+;; NOTE: Output footnotes inline with their backlink.
+(defun org-html-footnote-section (info)
+  "Format the footnote section.
+INFO is a plist used as a communication channel."
+  (pcase (org-export-collect-footnote-definitions info)
+    (`nil nil)
+    (definitions
+     (format
+      (plist-get info :html-footnotes-section)
+      (org-html--translate "Footnotes" info)
+      (format
+       "\n%s\n"
+       (mapconcat
+	    (lambda (definition)
+	      (pcase definition
+	        (`(,n ,label ,def)
+             ;; Do not assign number labels as they appear in Org mode
+             ;; - the footnotes are re-numbered by
+             ;; `org-export-get-footnote-number'.  If the label is not
+             ;; a number, keep it.
+             (when (and (stringp label)
+                        (equal label (number-to-string (string-to-number label))))
+               (setq label nil))
+	         ;; `org-export-collect-footnote-definitions' can return
+	         ;; two kinds of footnote definitions: inline and blocks.
+	         ;; Since this should not make any difference in the HTML
+	         ;; output, we wrap the inline definitions within
+	         ;; a "footpara" class paragraph.
+	         (let ((inline? (not (org-element-map def org-element-all-elements
+				                   #'identity nil t)))
+		           (anchor (org-html--anchor
+                            (format "fn.%s" (or label n))
+			                n
+			                (format " href=\"#fnr.%s\" role=\"doc-backlink\"" (or label n))
+			                info))
+		           (contents (org-trim (org-export-data def info))))
+	           (format "<p role=\"doc-footnote\">\n%s\n%s\n</p>\n"
+		               (format (plist-get info :html-footnote-format) anchor)
+                       contents)))))
+	    definitions
+	    "\n"))))))
+
+
+
 (org-publish-all t)
 (message "Build complete!")
